@@ -1,0 +1,19 @@
+upstream thumbor {
+    <% for i in 1..@instances %>
+      <%= "server 127.0.0.1:" + (@base_port-1+i).to_s %>
+    <% end %>
+}
+
+server {
+    listen <%= @server_port %>;
+    server_name localhost;
+    merge_slashes off;
+
+    location / {
+        proxy_pass http://thumbor;
+    }
+
+    location = /favicon.ico {
+        return 204;
+    }
+}
