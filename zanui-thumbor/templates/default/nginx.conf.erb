@@ -1,6 +1,6 @@
 upstream thumbor {
-    <% for i in 1..@instances %>
-      <%= "server 127.0.0.1:" + (@base_port-1+i).to_s %>
+    <% (@base_port..@base_port + @instances - 1).each do |port| %>
+        server 127.0.0.1:<%= port %>
     <% end %>
 }
 

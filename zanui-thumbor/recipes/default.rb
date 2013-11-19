@@ -14,7 +14,7 @@ bash "install_thumbor" do
   user "root"
   cwd "/tmp"
   code <<-EOH
-
+   #test if is necessary
   curl http://python-distribute.org/distribute_setup.py | sudo python
 
   EOH
@@ -45,11 +45,11 @@ template "/etc/nginx/conf.d/thumbor.conf" do
   owner  'root'
   group  'root'
   mode   '0644'
-  notifies :reload, 'service[thumbor]'
+  notifies :restart, 'service[thumbor]'
   variables({
-    :instances    => #{node['thumbor']['processes']},
-    :base_port    => #{node['thumbor']['base_port']},
-    :server_port  => #{node["nginx"]["port"]},
+    :instances    => node['thumbor']['processes'],
+    :base_port    => node['thumbor']['base_port'],
+    :server_port  => node["nginx"]["port"],
   })
 end
 
@@ -58,9 +58,10 @@ template "/etc/default/thumbor" do
     owner  'root'
     group  'root'
     mode   '0644'
+    notifies :restart, 'service[thumbor]'
     variables({
-    :instances  => #{node['thumbor']['processes']},
-    :base_port  => #{node['thumbor']['base_port']},
+    :instances  => node['thumbor']['processes'],
+    :base_port  => node['thumbor']['base_port'],
   })
 end
 
@@ -69,20 +70,25 @@ template "/etc/thumbor.conf" do
   owner  'root'
   group  'root'
   mode   '0644'
-  notifies :reload, 'service[thumbor]'
+  notifies :restart, 'service[thumbor]'
   variables({
-    #:instances    => #{node['thumbor']['processes']},
-    #:base_port    => #{node['thumbor']['base_port']},
-    #:server_port  => #{node["nginx"]["port"]},
+    #:instances    => "#{node['thumbor']['processes']}",
+    #:base_port    => "#{node['thumbor']['base_port']}",
+    #:server_port  => "#{node["nginx"]["port"]}",
   })
 
 end
 
 #sudo mv /etc/thumbor.key /etc/thumbor.key.orig
-template "/etc/thumbor.key" do
-  content #{node['thumbor']['key']}
+file "/etc/thumbor.key" do
+  content node['thumbor']['key']
   owner  'root'
   group  'root'
   mode   '0644'
-  #notifies :reload, 'service[thumbor]'
+  notifies :restart, 'service[thumbor]'
+end
+
+service 'thumbor' do
+ supports :restart => true
+ action   :start
 end

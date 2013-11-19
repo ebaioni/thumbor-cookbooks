@@ -18,12 +18,4 @@ ip=127.0.0.1
 # port=8888,8889,8890
 # or
 # port=8888 #Default
-<% PORTS = '' %>
-<% for i in 1..@instances %>
-<% if i == 1 %>
-    PORTS = (@base_port)
-<% elseif i == @instances %>
-    PORTS = #{PORTS} + "," + (@base_port -1 +i).to_s
-<% end %>
-<%= "port=#{PORTS} %>
-
+port=<%= (@base_port..@base_port + @instances - 1).to_a.join(",") %>
