@@ -6,19 +6,6 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-include_recipe "apt"
-include_recipe "nginx"
-include_recipe "curl"
-
-bash "install_thumbor" do
-  user "root"
-  cwd "/tmp"
-  code <<-EOH
-   #test if is necessary
-  curl http://python-distribute.org/distribute_setup.py | sudo python
-
-  EOH
-end
 
 apt_repository "thumbor" do
   uri           "http://ppa.launchpad.net/thumbor/ppa/ubuntu"
@@ -29,9 +16,6 @@ apt_repository "thumbor" do
   deb_src       true
 end
 
-
-  #sudo aptitude install -yq thumbor
-  #sudo aptitude install -yq redis-server
 ['thumbor', 'redis-server'].each do |pkg|
     package pkg
 end
@@ -72,14 +56,11 @@ template "/etc/thumbor.conf" do
   mode   '0644'
   notifies :restart, 'service[thumbor]'
   variables({
-    #:instances    => "#{node['thumbor']['processes']}",
-    #:base_port    => "#{node['thumbor']['base_port']}",
-    #:server_port  => "#{node["nginx"]["port"]}",
+    :options    => node['thumbor']['options']
   })
 
 end
 
-#sudo mv /etc/thumbor.key /etc/thumbor.key.orig
 file "/etc/thumbor.key" do
   content node['thumbor']['key']
   owner  'root'
