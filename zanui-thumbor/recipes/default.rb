@@ -6,7 +6,6 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-
 apt_repository "thumbor" do
   uri           "http://ppa.launchpad.net/thumbor/ppa/ubuntu"
   distribution  node['lsb']['codename']
@@ -16,7 +15,7 @@ apt_repository "thumbor" do
   deb_src       true
 end
 
-['thumbor', 'redis-server'].each do |pkg|
+['python-distribute', 'thumbor', 'redis-server'].each do |pkg|
     package pkg
 end
 

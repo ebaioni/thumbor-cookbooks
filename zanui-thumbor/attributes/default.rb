@@ -18,26 +18,26 @@ default["thumbor"]["options"]["MAX_AGE"] = 24 * 60 * 60
 default["thumbor"]["options"]["MAX_AGE_TEMP_IMAGE"] = 0
 
 # the way images are to be loaded
-default["thumbor"]["options"]["LOADER"] = 'thumbor.loaders.http_loader'
+default["thumbor"]["options"]["LOADER"] = "'thumbor.loaders.http_loader'"
 
 # if you set UPLOAD_ENABLED to True,
 # a route /upload will be enabled for your thumbor process
 # You can then do a put to this URL to store the photo
 # using the specified Storage
-default["thumbor"]["options"]["UPLOAD_ENABLED"] = false
+default["thumbor"]["options"]["UPLOAD_ENABLED"] = 'False'
 
 #UPLOAD_PHOTO_STORAGE = 'thumbor.storages.file_storage'
-default["thumbor"]["options"]["UPLOAD_PHOTO_STORAGE"] = false
+default["thumbor"]["options"]["UPLOAD_PHOTO_STORAGE"] = 'False'
 
 # how to store the loaded images so we don't have to load
 # them again with the loader
 #STORAGE = 'thumbor.storages.no_storage'
 #STORAGE = 'thumbor.storages.file_storage'
 #STORAGE = 'thumbor.storages.mixed_storage'
-default["thumbor"]["options"]["STORAGE"] = 'thumbor.storages.redis_storage'
+default["thumbor"]["options"]["STORAGE"] = "'thumbor.storages.redis_storage'"
 
 # root path of the file storage
-default["thumbor"]["options"]["FILE_STORAGE_ROOT_PATH"] = '/var/lib/thumbor/storage'
+default["thumbor"]["options"]["FILE_STORAGE_ROOT_PATH"] = "'/var/lib/thumbor/storage'"
 
 # If you want to cache results, use this options to specify how to cache it
 # Set Expiration seconds to ZERO if you want them not to expire.
@@ -45,13 +45,13 @@ default["thumbor"]["options"]["FILE_STORAGE_ROOT_PATH"] = '/var/lib/thumbor/stor
 #RESULT_STORAGE_EXPIRATION_SECONDS = 60 * 60 * 24 # one day
 #RESULT_STORAGE_FILE_STORAGE_ROOT_PATH = '/tmp/thumbor/result_storage'
 
-default["thumbor"]["options"]["RESULT_STORAGE_STORES_UNSAFE"] = false
+default["thumbor"]["options"]["RESULT_STORAGE_STORES_UNSAFE"] = 'False'
 
 # stores the crypto key in each image in the storage
 # this is VERY useful to allow changing the security key
-default["thumbor"]["options"]["STORES_CRYPTO_KEY_FOR_EACH_IMAGE"] = true
+default["thumbor"]["options"]["STORES_CRYPTO_KEY_FOR_EACH_IMAGE"] = 'True'
 
-default["thumbor"]["options"]["REDIS_STORAGE_SERVER_HOST"] = 'localhost'
+default["thumbor"]["options"]["REDIS_STORAGE_SERVER_HOST"] = "'localhost'"
 default["thumbor"]["options"]["REDIS_STORAGE_SERVER_PORT"] = 6379
 default["thumbor"]["options"]["REDIS_STORAGE_SERVER_DB"] = 0
 default["thumbor"]["options"]["REDIS_STORAGE_SERVER_PASSWORD"] = 'None'
@@ -60,7 +60,7 @@ default["thumbor"]["options"]["REDIS_STORAGE_SERVER_PASSWORD"] = 'None'
 # OpenCV will still be used for smart detection when PIL is the engine
 # but does not support flipping when used as the engine.
 #ENGINE = 'thumbor.engines.graphicsmagick'
-default["thumbor"]["options"]["ENGINE"] = 'thumbor.engines.pil'
+default["thumbor"]["options"]["ENGINE"] = "'thumbor.engines.pil'"
 #ENGINE = 'thumbor.engines.opencv'
 
 # detectors to use to find Focal Points in the image
@@ -72,7 +72,7 @@ default["thumbor"]["options"]["DETECTORS"] = [
 ]
 
 # Redis parameters for queued detectors
-default["thumbor"]["options"]["REDIS_QUEUE_SERVER_HOST"] = 'localhost'
+default["thumbor"]["options"]["REDIS_QUEUE_SERVER_HOST"] = "'localhost'"	
 default["thumbor"]["options"]["REDIS_QUEUE_SERVER_PORT"] = 6379
 default["thumbor"]["options"]["REDIS_QUEUE_SERVER_DB"] = 0
 default["thumbor"]["options"]["REDIS_QUEUE_SERVER_PASSWORD"] = 'None'
