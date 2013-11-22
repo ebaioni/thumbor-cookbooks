@@ -1,10 +1,31 @@
 default["nginx"]["port"] = 80
-default["thumbor"]["processes"] = 10
+default["thumbor"]["processes"] = 1
 default["thumbor"]["base_port"] = 9000
 default["thumbor"]["key"] = 'testkey'
 default["thumbor"]["queue"]["type"] = 'redis'
 default["thumbor"]["storage"]["type"] = 'file'
+
+default['thumbor_aws']['destination_path'] = 'thumbor_aws/'
+default['thumbor_aws']['repository_uri'] = 'https://github.com/willtrking/thumbor_aws'
+
+
+#SQS SETTINGS
+
+
 default["thumbor"]["options"] = {}
+
+# AWS CONFIG
+default["thumbor"]["options"]['AWS_ACCESS_KEY'] = "'AKIAJICSYLGT4WYBGDRA'"
+default["thumbor"]["options"]['AWS_SECRET_KEY'] = "'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'"
+default["thumbor"]["options"]['S3_ALLOWED_BUCKETS'] = "'zanui-thumbor'"
+default["thumbor"]["options"]['STORAGE_BUCKET'] = "'zanui-thumbor'"
+default["thumbor"]["options"]['S3_LOADER_BUCKET'] = "'zanui-thumbor'"
+default["thumbor"]["options"]['RESULT_STORAGE_STORES_UNSAFE'] = 'True'
+default["thumbor"]["options"]['RESULT_STORAGE_BUCKET'] = "'zanui-thumbor'"
+default["thumbor"]["options"]['RESULT_STORAGE'] = "'thumbor_aws.result_storages.s3_storage'"
+default["thumbor"]["options"]['SQS_QUEUE_KEY_ID'] = "'AKIAJICSYLGT4WYBGDRA'"
+default["thumbor"]["options"]['SQS_QUEUE_KEY_SECRET'] = "'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'"
+default["thumbor"]["options"]['SQS_QUEUE_REGION'] = "'ap-southeast-2'"
 
 # the quality of the generated image
 # this option can vary widely between
@@ -34,7 +55,7 @@ default["thumbor"]["options"]["UPLOAD_PHOTO_STORAGE"] = 'False'
 #STORAGE = 'thumbor.storages.no_storage'
 #STORAGE = 'thumbor.storages.file_storage'
 #STORAGE = 'thumbor.storages.mixed_storage'
-default["thumbor"]["options"]["STORAGE"] = "'thumbor.storages.redis_storage'"
+default["thumbor"]["options"]["STORAGE"] = "'thumbor_aws.storages.s3_storage'"
 
 # root path of the file storage
 default["thumbor"]["options"]["FILE_STORAGE_ROOT_PATH"] = "'/var/lib/thumbor/storage'"
@@ -66,13 +87,10 @@ default["thumbor"]["options"]["ENGINE"] = "'thumbor.engines.pil'"
 # detectors to use to find Focal Points in the image
 # more about detectors can be found in thumbor's docs
 # at https://github.com/globocom/thumbor/wiki
-default["thumbor"]["options"]["DETECTORS"] = [
-    'thumbor.detectors.face_detector',
-    'thumbor.detectors.feature_detector',
-]
+default["thumbor"]["options"]["DETECTORS"] = []
 
 # Redis parameters for queued detectors
-default["thumbor"]["options"]["REDIS_QUEUE_SERVER_HOST"] = "'localhost'"	
+default["thumbor"]["options"]["REDIS_QUEUE_SERVER_HOST"] = "'localhost'"
 default["thumbor"]["options"]["REDIS_QUEUE_SERVER_PORT"] = 6379
 default["thumbor"]["options"]["REDIS_QUEUE_SERVER_DB"] = 0
 default["thumbor"]["options"]["REDIS_QUEUE_SERVER_PASSWORD"] = 'None'
