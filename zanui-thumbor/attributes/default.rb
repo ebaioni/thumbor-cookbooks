@@ -6,11 +6,7 @@ default["thumbor"]["queue"]["type"] = 'redis'
 default["thumbor"]["storage"]["type"] = 'file'
 
 default['thumbor_aws']['destination_path'] = 'thumbor_aws/'
-default['thumbor_aws']['repository_uri'] = 'https://github.com/willtrking/thumbor_aws'
-
-
-#SQS SETTINGS
-
+default['thumbor_aws']['repository_uri'] = '"git+git://github.com/willtrking/thumbor_aws.git"'
 
 default["thumbor"]["options"] = {}
 
@@ -20,12 +16,13 @@ default["thumbor"]["options"]['AWS_SECRET_KEY'] = "'6+o2rAzHdKj5suRtNApAkMwQsOvH
 default["thumbor"]["options"]['S3_ALLOWED_BUCKETS'] = "'zanui-thumbor'"
 default["thumbor"]["options"]['STORAGE_BUCKET'] = "'zanui-thumbor'"
 default["thumbor"]["options"]['S3_LOADER_BUCKET'] = "'zanui-thumbor'"
-default["thumbor"]["options"]['RESULT_STORAGE_STORES_UNSAFE'] = 'True'
 default["thumbor"]["options"]['RESULT_STORAGE_BUCKET'] = "'zanui-thumbor'"
 default["thumbor"]["options"]['RESULT_STORAGE'] = "'thumbor_aws.result_storages.s3_storage'"
-default["thumbor"]["options"]['SQS_QUEUE_KEY_ID'] = "'AKIAJICSYLGT4WYBGDRA'"
-default["thumbor"]["options"]['SQS_QUEUE_KEY_SECRET'] = "'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'"
-default["thumbor"]["options"]['SQS_QUEUE_REGION'] = "'ap-southeast-2'"
+
+#SQS SETTINGS
+#default["thumbor"]["options"]['SQS_QUEUE_KEY_ID'] = ""
+#default["thumbor"]["options"]['SQS_QUEUE_KEY_SECRET'] = ""
+#default["thumbor"]["options"]['SQS_QUEUE_REGION'] = "'ap-southeast-2'"
 
 # the quality of the generated image
 # this option can vary widely between
@@ -66,16 +63,11 @@ default["thumbor"]["options"]["FILE_STORAGE_ROOT_PATH"] = "'/var/lib/thumbor/sto
 #RESULT_STORAGE_EXPIRATION_SECONDS = 60 * 60 * 24 # one day
 #RESULT_STORAGE_FILE_STORAGE_ROOT_PATH = '/tmp/thumbor/result_storage'
 
-default["thumbor"]["options"]["RESULT_STORAGE_STORES_UNSAFE"] = 'False'
+default["thumbor"]["options"]["RESULT_STORAGE_STORES_UNSAFE"] = 'True'
 
 # stores the crypto key in each image in the storage
 # this is VERY useful to allow changing the security key
 default["thumbor"]["options"]["STORES_CRYPTO_KEY_FOR_EACH_IMAGE"] = 'True'
-
-default["thumbor"]["options"]["REDIS_STORAGE_SERVER_HOST"] = "'localhost'"
-default["thumbor"]["options"]["REDIS_STORAGE_SERVER_PORT"] = 6379
-default["thumbor"]["options"]["REDIS_STORAGE_SERVER_DB"] = 0
-default["thumbor"]["options"]["REDIS_STORAGE_SERVER_PASSWORD"] = 'None'
 
 # imaging engine to use to process images
 # OpenCV will still be used for smart detection when PIL is the engine

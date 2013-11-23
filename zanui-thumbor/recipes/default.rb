@@ -15,7 +15,7 @@ apt_repository "thumbor" do
   deb_src       true
 end
 
-['python-distribute', 'thumbor', 'redis-server', 'git'].each do |pkg|
+['thumbor', 'redis-server', 'git'].each do |pkg|
     package pkg
 end
 
@@ -67,22 +67,10 @@ file "/etc/thumbor.key" do
   notifies :restart, 'service[thumbor]'
 end
 
-git "thumbor_aws" do
-  destination node['thumbor_aws']['destination_path']
-  repository node['thumbor_aws']['repository_uri']
-  action :checkout
-end
-
-#think how to avoid run it multiple times
-execute 'install thumbor_aws' do
-  cwd     "/#{node['thumbor_aws']['destination_path']}"
-  command "python setup.py install" 
+python_pip node['thumbor_aws']['repository_uri'] do
+  action :install
   notifies :restart, 'service[thumbor]'
 end
-
-# python_pip "git+git@github.com:willtrking/thumbor_aws.git" do
-#   action :install
-# end
 
 service 'thumbor' do
  supports :restart => true
