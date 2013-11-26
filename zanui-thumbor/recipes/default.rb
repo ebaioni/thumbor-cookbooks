@@ -15,12 +15,65 @@ apt_repository "thumbor" do
   deb_src       true
 end
 
-['thumbor', 'redis-server', 'git'].each do |pkg|
+['redis-server', 'git', 'python-derpconf', 'python-imaging', 'python-magic', 'python-numpy', 'python-opencv', 'python-tornado', 'python-redis', 'python-magic-dbg', 'libopencv-dev', 'libjpeg-dev'].each do |pkg|
     package pkg
 end
 
-execute "redis-restart" do
-  command 'sudo update-rc.d redis-server enable > /dev/null'
+service 'redis-server' do
+ supports :restart => true, :start => true, :stop => true, :reload => true
+ action   [:enable, :start] 
+end
+
+python_pip "git+git://github.com/globocom/thumbor.git" do
+  action :install
+  notifies :restart, 'service[thumbor]'
+end
+
+group "thumbor" do
+  action :create
+end
+
+user "thumbor" do
+  gid "thumbor"
+  action :create 
+end
+
+python_pip "git+git://github.com/globocom/remotecv.git" do
+  action :install
+  notifies :restart, 'service[thumbor]'
+end
+
+template "/etc/init/thumbor.conf" do
+  source 'thumbor.ubuntu.upstart.erb'
+  owner  'root'
+  group  'root'
+  mode   '0755'
+end
+
+template "/etc/init/thumbor-worker.conf" do
+  source 'thumbor.worker.erb'
+  owner  'root'
+  group  'root'
+  mode   '0755'
+end
+
+template "/etc/default/thumbor" do
+    source 'thumbor.default.erb'
+    owner  'root'
+    group  'root'
+    mode   '0644'
+    notifies :restart, 'service[thumbor]'
+    variables({
+    :instances  => node['thumbor']['processes'],
+    :base_port  => node['thumbor']['base_port'],
+  })
+end
+
+template "/etc/init.d/thumbor" do
+  source 'thumbor.init.erb'
+  owner  'root'
+  group  'root'
+  mode   '0755'
 end
 
 template "/etc/nginx/conf.d/thumbor.conf" do
@@ -33,18 +86,6 @@ template "/etc/nginx/conf.d/thumbor.conf" do
     :instances    => node['thumbor']['processes'],
     :base_port    => node['thumbor']['base_port'],
     :server_port  => node["nginx"]["port"],
-  })
-end
-
-template "/etc/default/thumbor" do
-    source 'thumbor.default.erb'
-    owner  'root'
-    group  'root'
-    mode   '0644'
-    notifies :restart, 'service[thumbor]'
-    variables({
-    :instances  => node['thumbor']['processes'],
-    :base_port  => node['thumbor']['base_port'],
   })
 end
 
@@ -73,6 +114,9 @@ python_pip node['thumbor_aws']['repository_uri'] do
 end
 
 service 'thumbor' do
- supports :restart => true
- action   :start
+ supports :restart => true, :start => true, :stop => true, :reload => true
+ action   [:enable, :start] 
 end
+
+
+
