@@ -108,7 +108,7 @@ file "/etc/thumbor.key" do
   notifies :restart, 'service[thumbor]'
 end
 
-python_pip node['thumbor_aws']['repository_uri'] do
+python_pip "git+git://github.com/willtrking/thumbor_aws.git" do
   action :install
   notifies :restart, 'service[thumbor]'
 end

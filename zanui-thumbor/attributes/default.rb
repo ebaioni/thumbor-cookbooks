@@ -1,28 +1,25 @@
 default["nginx"]["port"] = 80
 default["thumbor"]["processes"] = 1
 default["thumbor"]["base_port"] = 9000
-default["thumbor"]["key"] = 'testkey'
-default["thumbor"]["queue"]["type"] = 'redis'
-default["thumbor"]["storage"]["type"] = 'file'
-
-default['thumbor_aws']['destination_path'] = 'thumbor_aws/'
-default['thumbor_aws']['repository_uri'] = '"git+git://github.com/willtrking/thumbor_aws.git"'
+default["thumbor"]["key"] = "testkey"
+default["thumbor"]["queue"]["type"] = "redis"
+default["thumbor"]["storage"]["type"] = "file"
 
 default["thumbor"]["options"] = {}
 
 # AWS CONFIG
-default["thumbor"]["options"]['AWS_ACCESS_KEY'] = "'AKIAJICSYLGT4WYBGDRA'"
-default["thumbor"]["options"]['AWS_SECRET_KEY'] = "'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'"
-default["thumbor"]["options"]['S3_ALLOWED_BUCKETS'] = "'zanui-thumbor'"
-default["thumbor"]["options"]['STORAGE_BUCKET'] = "'zanui-thumbor'"
-default["thumbor"]["options"]['S3_LOADER_BUCKET'] = "'zanui-thumbor'"
-default["thumbor"]["options"]['RESULT_STORAGE_BUCKET'] = "'zanui-thumbor'"
-default["thumbor"]["options"]['RESULT_STORAGE'] = "'thumbor_aws.result_storages.s3_storage'"
+default["thumbor"]["options"]['AWS_ACCESS_KEY'] = "AKIAJICSYLGT4WYBGDRA"
+default["thumbor"]["options"]['AWS_SECRET_KEY'] = "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"
+default["thumbor"]["options"]['S3_ALLOWED_BUCKETS'] = "zanui-thumbor"
+default["thumbor"]["options"]['STORAGE_BUCKET'] = "zanui-thumbor"
+default["thumbor"]["options"]['S3_LOADER_BUCKET'] = "zanui-thumbor"
+default["thumbor"]["options"]['RESULT_STORAGE_BUCKET'] = "zanui-thumbor"
+default["thumbor"]["options"]['RESULT_STORAGE'] = "thumbor_aws.result_storages.s3_storage"
 
 #SQS SETTINGS
 #default["thumbor"]["options"]['SQS_QUEUE_KEY_ID'] = ""
 #default["thumbor"]["options"]['SQS_QUEUE_KEY_SECRET'] = ""
-#default["thumbor"]["options"]['SQS_QUEUE_REGION'] = "'ap-southeast-2'"
+#default["thumbor"]["options"]['SQS_QUEUE_REGION'] = "ap-southeast-2"
 
 # the quality of the generated image
 # this option can vary widely between
@@ -36,26 +33,26 @@ default["thumbor"]["options"]["MAX_AGE"] = 24 * 60 * 60
 default["thumbor"]["options"]["MAX_AGE_TEMP_IMAGE"] = 0
 
 # the way images are to be loaded
-default["thumbor"]["options"]["LOADER"] = "'thumbor.loaders.http_loader'"
+default["thumbor"]["options"]["LOADER"] = "thumbor.loaders.http_loader"
 
 # if you set UPLOAD_ENABLED to True,
 # a route /upload will be enabled for your thumbor process
 # You can then do a put to this URL to store the photo
 # using the specified Storage
-default["thumbor"]["options"]["UPLOAD_ENABLED"] = 'False'
+default["thumbor"]["options"]["UPLOAD_ENABLED"] = "False"
 
 #UPLOAD_PHOTO_STORAGE = 'thumbor.storages.file_storage'
-default["thumbor"]["options"]["UPLOAD_PHOTO_STORAGE"] = 'False'
+default["thumbor"]["options"]["UPLOAD_PHOTO_STORAGE"] = "False"
 
 # how to store the loaded images so we don't have to load
 # them again with the loader
 #STORAGE = 'thumbor.storages.no_storage'
 #STORAGE = 'thumbor.storages.file_storage'
 #STORAGE = 'thumbor.storages.mixed_storage'
-default["thumbor"]["options"]["STORAGE"] = "'thumbor_aws.storages.s3_storage'"
+default["thumbor"]["options"]["STORAGE"] = "thumbor_aws.storages.s3_storage"
 
 # root path of the file storage
-default["thumbor"]["options"]["FILE_STORAGE_ROOT_PATH"] = "'/var/lib/thumbor/storage'"
+default["thumbor"]["options"]["FILE_STORAGE_ROOT_PATH"] = "/var/lib/thumbor/storage"
 
 # If you want to cache results, use this options to specify how to cache it
 # Set Expiration seconds to ZERO if you want them not to expire.
@@ -63,29 +60,29 @@ default["thumbor"]["options"]["FILE_STORAGE_ROOT_PATH"] = "'/var/lib/thumbor/sto
 #RESULT_STORAGE_EXPIRATION_SECONDS = 60 * 60 * 24 # one day
 #RESULT_STORAGE_FILE_STORAGE_ROOT_PATH = '/tmp/thumbor/result_storage'
 
-default["thumbor"]["options"]["RESULT_STORAGE_STORES_UNSAFE"] = 'True'
+default["thumbor"]["options"]["RESULT_STORAGE_STORES_UNSAFE"] = "True"
 
 # stores the crypto key in each image in the storage
 # this is VERY useful to allow changing the security key
-default["thumbor"]["options"]["STORES_CRYPTO_KEY_FOR_EACH_IMAGE"] = 'True'
+default["thumbor"]["options"]["STORES_CRYPTO_KEY_FOR_EACH_IMAGE"] = "True"
 
 # imaging engine to use to process images
 # OpenCV will still be used for smart detection when PIL is the engine
 # but does not support flipping when used as the engine.
 #ENGINE = 'thumbor.engines.graphicsmagick'
-default["thumbor"]["options"]["ENGINE"] = "'thumbor.engines.pil'"
+default["thumbor"]["options"]["ENGINE"] = "thumbor.engines.pil"
 #ENGINE = 'thumbor.engines.opencv'
 
 # detectors to use to find Focal Points in the image
 # more about detectors can be found in thumbor's docs
 # at https://github.com/globocom/thumbor/wiki
-#default["thumbor"]["options"]["DETECTORS"] = []
+default["thumbor"]["options"]["DETECTORS"] = []
 
 # Redis parameters for queued detectors
-default["thumbor"]["options"]["REDIS_QUEUE_SERVER_HOST"] = "'localhost'"
+default["thumbor"]["options"]["REDIS_QUEUE_SERVER_HOST"] = "localhost"
 default["thumbor"]["options"]["REDIS_QUEUE_SERVER_PORT"] = 6379
 default["thumbor"]["options"]["REDIS_QUEUE_SERVER_DB"] = 0
-default["thumbor"]["options"]["REDIS_QUEUE_SERVER_PASSWORD"] = 'None'
+default["thumbor"]["options"]["REDIS_QUEUE_SERVER_PASSWORD"] = "None"
 
 # if you use face detection this is the file that
 # OpenCV will use to find faces. The default should be
@@ -106,22 +103,22 @@ default["thumbor"]["options"]["REDIS_QUEUE_SERVER_PASSWORD"] = 'None'
 #MIXED_STORAGE_CRYPTO_STORAGE = 'thumbor.storages.no_storage'
 #MIXED_STORAGE_DETECTOR_STORAGE = 'thumbor.storages.no_storage'
 
-# default["thumbor"]["options"]["FILTERS"] = [
-#     'thumbor.filters.brightness',
-#     'thumbor.filters.contrast',
-#     'thumbor.filters.rgb',
-#     'thumbor.filters.round_corner',
-#     'thumbor.filters.quality',
-#     'thumbor.filters.noise',
-#     'thumbor.filters.watermark',
-#     'thumbor.filters.equalize',
-#     'thumbor.filters.fill',
-#     'thumbor.filters.sharpen',
-#     'thumbor.filters.strip_icc',
-#     'thumbor.filters.frame',
+default["thumbor"]["options"]["FILTERS"] = [
+    "thumbor.filters.brightness",
+    "thumbor.filters.contrast",
+    "thumbor.filters.rgb",
+    "thumbor.filters.round_corner",
+    "thumbor.filters.quality",
+    "thumbor.filters.noise",
+    "thumbor.filters.watermark",
+    "thumbor.filters.equalize",
+    "thumbor.filters.fill",
+    "thumbor.filters.sharpen",
+    "thumbor.filters.strip_icc",
+    "thumbor.filters.frame",
 
     # can only be applied if there are already points for the image being served
     # this means that either you are using the local face detector or the image
     # has already went through remote detection
     # 'thumbor.filters.redeye',
-# ]
+]
