@@ -15,7 +15,7 @@ apt_repository "thumbor" do
   deb_src       true
 end
 
-['redis-server', 'git', 'python-derpconf', 'python-imaging', 'python-magic', 'python-numpy', 'python-opencv', 'python-tornado', 'python-redis', 'python-magic-dbg', 'libopencv-dev', 'libjpeg-dev'].each do |pkg|
+['redis-server', 'git', 'python-derpconf', 'python-imaging', 'python-magic', 'python-numpy', 'python-opencv', 'python-tornado', 'python-redis', 'python-magic-dbg', 'libopencv-dev', 'libjpeg-dev', 'python-dateutil'].each do |pkg|
     package pkg
 end
 

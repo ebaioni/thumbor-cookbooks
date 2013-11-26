@@ -79,7 +79,7 @@ default["thumbor"]["options"]["ENGINE"] = "'thumbor.engines.pil'"
 # detectors to use to find Focal Points in the image
 # more about detectors can be found in thumbor's docs
 # at https://github.com/globocom/thumbor/wiki
-default["thumbor"]["options"]["DETECTORS"] = []
+#default["thumbor"]["options"]["DETECTORS"] = []
 
 # Redis parameters for queued detectors
 default["thumbor"]["options"]["REDIS_QUEUE_SERVER_HOST"] = "'localhost'"
@@ -106,22 +106,22 @@ default["thumbor"]["options"]["REDIS_QUEUE_SERVER_PASSWORD"] = 'None'
 #MIXED_STORAGE_CRYPTO_STORAGE = 'thumbor.storages.no_storage'
 #MIXED_STORAGE_DETECTOR_STORAGE = 'thumbor.storages.no_storage'
 
-default["thumbor"]["options"]["FILTERS"] = [
-    'thumbor.filters.brightness',
-    'thumbor.filters.contrast',
-    'thumbor.filters.rgb',
-    'thumbor.filters.round_corner',
-    'thumbor.filters.quality',
-    'thumbor.filters.noise',
-    'thumbor.filters.watermark',
-    'thumbor.filters.equalize',
-    'thumbor.filters.fill',
-    'thumbor.filters.sharpen',
-    'thumbor.filters.strip_icc',
-    'thumbor.filters.frame',
+# default["thumbor"]["options"]["FILTERS"] = [
+#     'thumbor.filters.brightness',
+#     'thumbor.filters.contrast',
+#     'thumbor.filters.rgb',
+#     'thumbor.filters.round_corner',
+#     'thumbor.filters.quality',
+#     'thumbor.filters.noise',
+#     'thumbor.filters.watermark',
+#     'thumbor.filters.equalize',
+#     'thumbor.filters.fill',
+#     'thumbor.filters.sharpen',
+#     'thumbor.filters.strip_icc',
+#     'thumbor.filters.frame',
 
     # can only be applied if there are already points for the image being served
     # this means that either you are using the local face detector or the image
     # has already went through remote detection
     # 'thumbor.filters.redeye',
-]
+# ]
