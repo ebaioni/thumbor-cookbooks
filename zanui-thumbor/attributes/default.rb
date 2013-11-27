@@ -84,6 +84,8 @@ default["thumbor"]["options"]["REDIS_QUEUE_SERVER_PORT"] = 6379
 default["thumbor"]["options"]["REDIS_QUEUE_SERVER_DB"] = 0
 default["thumbor"]["options"]["REDIS_QUEUE_SERVER_PASSWORD"] = "None"
 
+default["thumbor"]["options"]["AUTO_WEBP"] = "True"
+
 # if you use face detection this is the file that
 # OpenCV will use to find faces. The default should be
 # fine, so change this at your own peril.
