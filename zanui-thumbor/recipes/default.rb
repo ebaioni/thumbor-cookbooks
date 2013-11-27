@@ -114,7 +114,7 @@ libboost-python-dev
 tree
 webp
 libwebp-dev
-dateutil.parser
+python-dateutil
 }
 
 required_packages.each do |pkg|
