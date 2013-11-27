@@ -15,7 +15,108 @@ apt_repository "thumbor" do
   deb_src       true
 end
 
-['redis-server', 'git', 'python-derpconf', 'python-imaging', 'python-magic', 'python-numpy', 'python-opencv', 'python-tornado', 'python-redis', 'python-magic-dbg', 'libopencv-dev', 'libjpeg-dev', 'python-dateutil'].each do |pkg|
+apt_repository "multiverse" do
+  uri           "http://us.archive.ubuntu.com/ubuntu/"
+  distribution  node['lsb']['codename']
+  components    ["main", "multiverse"]
+  deb_src       true
+  action        :add
+  notifies :run, "execute[apt-get update]", :immediately
+end
+
+required_packages = %w{
+libevent-dev
+libxml2-dev
+libcurl4-gnutls-dev
+python-pycurl-dbg
+librtmp-dev
+libatlas-base-dev
+gfortran
+liblapack-dev
+libblas-dev
+build-essential
+checkinstall
+git
+pkg-config
+cmake
+libpng12-0
+libpng12-dev
+libpng++-dev
+libpng3
+libpnglite-dev
+libfaac-dev
+libjack-jackd2-dev
+libjasper-dev
+libjasper-runtime
+libjasper1
+libmp3lame-dev
+libopencore-amrnb-dev
+libopencore-amrwb-dev
+libsdl1.2-dev
+libtheora-dev
+libva-dev
+libvdpau-dev
+libvorbis-dev
+libx11-dev
+libxfixes-dev
+libxvidcore-dev
+texi2html
+yasm
+zlib1g-dev
+zlib1g-dbg
+zlib1g
+libgstreamer0.10-0
+libgstreamer0.10-dev
+libgstreamer0.10-0-dbg
+gstreamer0.10-tools
+gstreamer0.10-plugins-base
+libgstreamer-plugins-base0.10-dev
+gstreamer0.10-plugins-good
+gstreamer0.10-plugins-ugly
+gstreamer0.10-plugins-bad
+gstreamer0.10-ffmpeg
+pngtools
+libtiff4-dev
+libtiff4
+libtiffxx0c2
+libtiff-tools
+libjpeg8
+libjpeg8-dev
+libjpeg8-dbg
+libjpeg-progs
+libavcodec-dev
+libavcodec53
+libavformat53
+libavformat-dev
+libxine1-ffmpeg
+libxine-dev
+libxine1-bin
+libunicap2
+libunicap2-dev
+libdc1394-22-dev
+libdc1394-22
+libdc1394-utils
+swig
+libpython2.7
+python-dev
+python2.7-dev
+libjpeg-progs
+libjpeg-dev
+libgtk2.0-0
+libgtk2.0-dev
+gtk2-engines-pixbuf
+python-numpy
+python-opencv
+redis-server
+libgraphicsmagick++1-dev
+libgraphicsmagick++3
+libboost-python-dev
+tree
+webp
+libwebp-dev
+}
+
+required_packages.each do |pkg|
     package pkg
 end
 
